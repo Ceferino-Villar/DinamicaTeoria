@@ -1,0 +1,10 @@
+body {
+    background-color: #fafbfc;
+}
+.lang-card {
+    transition: transform 0.2s ease-in-out;
+    border-top: 4px solid #198754;
+}
+.lang-card:hover {
+    transform: translateY(-5px);
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir - Lenguajes de Programación</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS Independiente de la Página 3 -->
+    <link rel="stylesheet" href="css/add.css">
+</head>
+<body>
+
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">DevLanguages</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html">Inicio</a>
+                <a class="nav-link" href="catalog.html">Catálogo</a>
+                <a class="nav-link active" href="add.html">Añadir</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card form-container shadow p-4">
+                    <h3 class="mb-3 text-center">Registrar Nuevo Lenguaje</h3>
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombreLang" class="form-label">Nombre del Lenguaje</label>
+                            <input type="text" class="form-control" id="nombreLang" placeholder="Ej. TypeScript">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descLang" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descLang" rows="3" placeholder="Breve descripción..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Guardar Lenguaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

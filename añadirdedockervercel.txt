@@ -1,0 +1,65 @@
+Hasta ahora has avanzado muy bien y ya tienes configurada la mayor parte del núcleo tecnológico: el Backend con Node.js, Express, SQLite y REST API, y el Frontend híbrido con React, Vue.js, Bootstrap y Fetch API.
+
+Lo que te falta añadir o configurar para completar todo lo que pediste al principio es lo siguiente:
+
+1. Comprobar la integración local
+Antes de empaquetar con Docker, asegúrate de tener ambos servicios corriendo al mismo tiempo en dos terminales separadas para verificar que la Fetch API del frontend se comunica correctamente con tu base de datos SQLite en el backend:
+
+En la terminal del backend (/backend): npx nodemon index.js
+
+En la terminal del frontend (/frontend): npm run dev
+
+2. Añadir Docker (Contenedores)
+Como querías usar Docker al final, solo necesitas crear tres archivos en tu estructura de carpetas (carpetarivera):
+
+Archivo backend/Dockerfile:
+
+Dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3001
+CMD ["node", "index.js"]
+Archivo frontend/Dockerfile:
+
+Dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 5173
+CMD ["npm", "run", "dev", "--", "--host"]
+Archivo docker-compose.yml (en la raíz carpetarivera/):
+
+YAML
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+Para probarlo cuando lo tengas creado, simplemente ejecutas docker compose up --build desde la carpeta raíz.
+
+3. Preparar el despliegue en Vercel
+Para llevar el proyecto a producción con Vercel, ten en cuenta una consideración clave sobre SQLite:
+
+Vercel está diseñado para hospedar archivos estáticos y funciones serverless efímeras. Si subes el backend con SQLite directamente a Vercel, el archivo de la base de datos se reiniciará constantemente y perderás los datos guardados.
+
+La solución recomendada: Desplegar el Frontend (/frontend) en Vercel de forma gratuita, y alojar el Backend con SQLite en un servicio con disco persistente (como Render, Railway o Fly.io), o bien migrar la base de datos de SQLite local a una alternativa serverless en la nube como Turso si prefieres mantener todo compatible con arquitecturas serverless.
