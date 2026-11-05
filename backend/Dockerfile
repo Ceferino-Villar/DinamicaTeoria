@@ -7,10 +7,10 @@ WORKDIR /app
 # 3. Copiar los archivos de dependencias
 COPY package*.json ./
 
-# 4. Instalar las dependencias de producción
-RUN npm install --production
+# 4. Instalar todas las dependencias
+RUN npm install
 
-# 5. Copiar el resto del código del backend y la base de datos
+# 5. Copiar el resto del código del backend
 COPY . .
 
 # 6. Exponer el puerto que usará el contenedor
