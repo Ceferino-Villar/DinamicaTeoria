@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import VueWrapper from '../components/VueWrapper'; // Importa el wrapper de Vue
 import '../css/catalog.css';
 
-// URL del backend desplegado en Railway (puedes configurar VITE_API_URL en Vercel)
 const API_URL = import.meta.env.VITE_API_URL || 'https://dinamicateoria-production.up.railway.app';
 
 export default function Catalog() {

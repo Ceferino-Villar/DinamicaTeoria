@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/add.css';
 
+const API_URL = import.meta.env.VITE_API_URL || 'https://dinamicateoria-production.up.railway.app';
+
 export default function AddLanguage() {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
@@ -18,7 +20,7 @@ export default function AddLanguage() {
     }
 
     try {
-      const resGet = await fetch('http://localhost:3001/api/datos');
+      const resGet = await fetch(`${API_URL}/api/datos`);
       const lenguajesExistentes = await resGet.json();
 
       const yaExiste = lenguajesExistentes.some(
@@ -30,7 +32,7 @@ export default function AddLanguage() {
         return;
       }
 
-      const resPost = await fetch('http://localhost:3001/api/datos', {
+      const resPost = await fetch(`${API_URL}/api/datos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre: nombre.trim(), descripcion: descripcion.trim() })
