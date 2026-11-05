@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import VueWrapper from '../components/VueWrapper'; // Importa el wrapper de Vue
 import '../css/catalog.css';
 
+// URL del backend desplegado en Railway (puedes configurar VITE_API_URL en Vercel)
+const API_URL = import.meta.env.VITE_API_URL || 'https://dinamicateoria-production.up.railway.app';
+
 export default function Catalog() {
   const [lenguajes, setLenguajes] = useState([]);
 
@@ -12,7 +15,7 @@ export default function Catalog() {
 
   // Función para cargar los datos del backend
   const cargarDatos = () => {
-    fetch('http://localhost:3001/api/datos')
+    fetch(`${API_URL}/api/datos`)
       .then((res) => res.json())
       .then((data) => setLenguajes(data))
       .catch((err) => console.error('Error al cargar los datos:', err));
@@ -25,7 +28,7 @@ export default function Catalog() {
   // Función para Eliminar un lenguaje
   const handleDelete = (id) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar este lenguaje?')) {
-      fetch(`http://localhost:3001/api/datos/${id}`, {
+      fetch(`${API_URL}/api/datos/${id}`, {
         method: 'DELETE',
       })
         .then((res) => {
@@ -48,7 +51,7 @@ export default function Catalog() {
 
   // Función para guardar los cambios (PUT)
   const handleSaveEdit = (id) => {
-    fetch(`http://localhost:3001/api/datos/${id}`, {
+    fetch(`${API_URL}/api/datos/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre: nombreEdit, descripcion: descEdit }),
