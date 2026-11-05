@@ -1,0 +1,4 @@
+npm install front y back
+npm install --save-dev nodemon back
+npm nodemon index.js back
+npm run dev front
